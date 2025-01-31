@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital User Page</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><b>KSR Hospital</b></h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#doctors">Doctors</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="media-wrapper">
+                <img src="bg01.jpg" alt="Background Image" height="500" width="500">
+                <video autoplay muted loop>
+                    <source src="hop.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <a href="#services" class="btn">Learn More</a>
+        </div>
+    </section>
+    
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-list">
+                <div class="service-item">
+                    <h3>Emergency Care</h3>
+                    <p>24/7 emergency services with state-of-the-art facilities.</p>
+                </div>
+                <div class="service-item">
+                    <h3>General Surgery</h3>
+                    <p>Expert surgical care for a wide range of conditions.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Pediatrics</h3>
+                    <p>Comprehensive care for children of all ages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors" class="doctors">
+        <div class="container">
+            <h2>Our Doctors</h2>
+            <div class="doctor-list">
+                <div class="doctor-item">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400" alt="Doctor John Doe">
+                    <h3>Dr. John Doe</h3>
+                    <p>Cardiologist</p>
+                </div>
+                <div class="doctor-item">
+                    <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400" alt="Doctor Jane Smith">
+                    <h3>Dr. Jane Smith</h3>
+                    <p>Pediatrician</p>
+                </div>
+                <div class="doctor-item">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400" alt="Doctor Emily Brown">
+                    <h3>Dr.jhony sins</h3>
+                    <p>General Surgeon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need to schedule an appointment, please reach out to us.</p>
+            <form action="#" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 City Hospital. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
