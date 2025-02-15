@@ -1,0 +1,95 @@
+/* General Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #666;
+    background-color: #3931af;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  /* Navbar */
+  .custom-navbar {
+    background: linear-gradient(to right, #3931af, #00c6ff);
+    
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navbar-nav .nav-link {
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Hero Section */
+  .intro {
+    background: linear-gradient(to right, #3931af, #00c6ff);
+    padding: 100px 0;
+    color: white;
+  }
+  
+  .intro h2 {
+    font-size: 36px;
+  }
+  
+  .intro h4 {
+    font-size: 24px;
+  }
+  
+  .lead-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .lead-list li {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .lead-list i {
+    color: #00c6ff;
+    margin-right: 10px;
+  }
+
+  .lead-list .btn {
+
+      background-color:#00c6ff;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+  }
+  
+  
+  
+  /* Services Section */
+  .services {
+    background: linear-gradient(to right, #3931af, #00c6ff);
+    color: white;
+    text-align: center;
+  }
+  
+  .services i {
+    color: #fff;
+    margin-bottom: 1px;
+  }
+  
+  .services h4 {
+    font-size: 22px;
+    margin-top: 10px;
+  }
+  
+  /* Footer */
+  footer {
+    background: linear-gradient(to right, #3931af, #00c6ff);
+    color: #e4d6d6;
+  }
+  
+  

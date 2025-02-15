@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        body {
+            background: linear-gradient(to right, #3a1c71, #00c6ff);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .custom-navbar {
+             background: linear-gradient(to right, #3931af, #00c6ff);
+    
+         }
+  
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+        
+        .contact-box {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            height: 630px;
+            margin-top: 0px;
+        }
+        
+        .icon-box {
+            background: #fff;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .icon-box i {
+            font-size: 30px;
+            color: #007bff;
+        }
+        
+        .contact-box h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+    
+        .form-control {
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+       
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            background-color: #007bff;
+            border: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .img-logo {
+            margin-top: 5px;
+        }
+        .contact-image
+        {
+            margin-top: -50px;
+        }
+        </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white" href="#">KSR HOSPITALS</a>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link text-white" href="index.php">HOME</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="services.html">ABOUT US</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="contact.html">CONTACT</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav> 
+
+   
+    <div class="contact-container">
+        <div class="contact-box">
+            <div class="contact-image">
+                <img src="image/contact.png" alt="contact"/>
+            </div>
+            <h2 class="img-logo">Drop Us a Message</h2>
+            <form id="contactForm">
+                <input type="text" id="name" class="form-control" placeholder="Your Name *" required>
+                <input type="email" id="email" class="form-control" placeholder="Your Email *" required>
+                <input type="tel" id="phone" class="form-control" placeholder="Your Phone Number *" required>
+                <textarea id="message" class="form-control" placeholder="Your Message *" rows="4" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+        <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); 
+
+        
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let message = document.getElementById("message").value.trim();
+
+
+        if (name === "" || email === "" || phone === "" || message === "") {
+            alert("All fields are required!");
+            return;
+        }
+
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+            alert("Invalid name! Only letters and spaces allowed.");
+            return;
+        }
+
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Invalid email format!");
+            return;
+        }
+
+        if (!/^\d{10}$/.test(phone)) {
+            alert("Invalid phone number! Must be 10 digits.");
+            return;
+        }
+
+       
+        alert("Message sent successfully!");
+
+        
+        document.getElementById("contactForm").reset();
+    });
+</script>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

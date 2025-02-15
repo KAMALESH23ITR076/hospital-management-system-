@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to left, #3931af, #00c6ff);
+            background-size: cover;
+        }
+        .form-control { border-radius: 0.75rem; }
+        .register { margin-top: 3%; padding: 3%; }
+        .register-left { text-align: center; color: #fff; margin-top: 4%; }
+        .register-left input {
+            border: none;
+            border-radius: 1.5rem;
+            padding: 2%;
+            width: 60%;
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #383d41;
+            margin-top: 30%;
+            margin-bottom: 3%;
+            cursor: pointer;
+        }
+        .register-right {
+            background: #f8f9fa;
+            border-top-left-radius: 10% 50%;
+            border-bottom-left-radius: 10% 50%;
+        }
+        .register-left img {
+            margin-top: 15%;
+            width: 25%;
+            animation: mover 1s infinite alternate;
+        }
+        @keyframes mover {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+        .register-heading { text-align: center; margin-top: 8%; color: #495057; }
+        .btnRegister {
+            float: right;
+            margin-top: 10%;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 2%;
+            background: #0062cc;
+            color: #fff;
+            font-weight: 600;
+            width: 50%;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function check() {
+            var pass = document.getElementById('password').value;
+            var cpass = document.getElementById('cpassword').value;
+            var message = document.getElementById('message');
+            message.style.color = (pass === cpass) ? '#5dd05d' : '#f55252';
+            message.innerHTML = (pass === cpass) ? 'Matched' : 'Not Matching';
+        }
+        function checklen() {
+            var pass = document.getElementById("password");
+            if (pass.value.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">GLOBAL HOSPITALS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.php">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">ABOUT US</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                <h3>Welcome</h3>
+            </div>
+            <div class="col-md-9 register-right">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#home">Patient</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#doctor">Doctor</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#admin">Admin</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="home">
+                        <h3 class="register-heading">Register as Patient</h3>
+                        <form method="post" action="func2.php">
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="First Name *" name="fname" required/>
+                                    <input type="email" class="form-control" placeholder="Your Email *" name="email"/>
+                                    <input type="password" class="form-control" placeholder="Password *" id="password" name="password" onkeyup='check();' required/>
+                                    <div class="maxl">
+                                        <label><input type="radio" name="gender" value="Male" checked> Male </label>
+                                        <label><input type="radio" name="gender" value="Female"> Female </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Last Name *" name="lname" required/>
+                                    <input type="tel" class="form-control" placeholder="Your Phone *" name="contact"/>
+                                    <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password *" name="cpassword" onkeyup='check();' required/>
+                                    <span id='message'></span>
+                                    <input type="submit" class="btnRegister" onclick="return checklen();" value="Register"/>
+                                </div>
+                                
+                            </div>
+                            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <h3  class="register-heading">Login as Doctor</h3>
+                                <form method="post" action="func1.php">
+                                <div class="row register-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="User Name *" name="username3" onkeydown="return alphaOnly(event);" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="Password *" name="password3" required/>
+                                        </div>
+                                        
+                                        <input type="submit" class="btnRegister" name="docsub1" value="Login"/>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap 5 JS (with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
