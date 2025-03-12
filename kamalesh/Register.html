@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSR HOSPITALS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        /* Gradient Background */
+            body {
+                background: linear-gradient(to right, #3a1c71, #00c6ff);
+                color: #fff;
+                font-family: 'Arial', sans-serif;
+            }
+    
+            .custom-navbar {
+                 background: linear-gradient(to right, #3931af, #00c6ff);
+        
+             }
+      
+            .navbar-brand {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+            nav ul li {
+                display: inline;
+                margin: 0 15px;
+            }
+            </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white" href="#">KSR HOSPITALS</a>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link text-white" href="index.php">HOME</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="services.html">ABOUT US</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="contact.html">CONTACT</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!-- Registration & Login Forms -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <h3 class="text-center">Register as <span id="role-title">Patient</span></h3>
+                    <div class="btn-group w-100 my-3">
+                        <button class="btn btn-primary role-btn" data-role="Patient">Patient</button>
+                        <button class="btn btn-outline-primary role-btn" data-role="Doctor">Doctor</button>
+                        <button class="btn btn-outline-primary role-btn" data-role="Receptionist">Receptionist</button>
+                    </div>
+
+                    <!-- Patient Registration Form -->
+                    <form id="registration-form" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="first-name" placeholder="First Name *">
+                                <div class="invalid-feedback">Please enter your first name.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="last-name" placeholder="Last Name *">
+                                <div class="invalid-feedback">Please enter your last name.</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="email" class="form-control" id="email" placeholder="Your Email *">
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="tel" class="form-control" id="phone" placeholder="Your Phone *" pattern="^\d{10}$">
+                                <div class="invalid-feedback">Please enter a valid phone number (10 digits).</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="password" class="form-control" id="password" placeholder="Password *">
+                                <div class="invalid-feedback">Password must be at least 6 characters long.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password *">
+                                <div class="invalid-feedback">Passwords do not match.</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                            <select class="form-control" id="state">
+                                <option value="" disabled selected>Select State *</option>
+                                <option value="tamilnadu">Tamil Nadu</option>
+                                <option value="kerala">Kerala</option>
+                                <option value="karnataka">Karnataka</option>
+                                <option value="andhra">Andhra Pradesh</option>
+                            </select>
+                            <div class="invalid-feedback">Password must be at least 6 characters long.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <select class="form-control" id="city">
+                                    <option value="" disabled selected>Select City *</option>
+                                    <option value="tamilnadu">Tamil Nadu</option>
+                                    <option value="kerala">Kerala</option>
+                                    <option value="karnataka">Karnataka</option>
+                                    <option value="andhra">Andhra Pradesh</option>
+                                </select>
+                                <div class="invalid-feedback">Password must be at least 6 characters long.</div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <textarea class="form-control" id="address" placeholder="Address *" rows="3"></textarea>
+                                <div class="invalid-feedback">Passwords do not match.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="date" class="form-control" id="password" placeholder="Password *"><p></p>
+                                <input type="password" class="form-control" id="password" placeholder="Password *">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Gender:</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" value="Male" id="gender-male">
+                                <label class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" value="Female" id="gender-female">
+                                <label class="form-check-label">Female</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" value="other" id="gender-other">
+                                <label class="form-check-label">other</label>
+                            </div>
+                            <div class="invalid-feedback">Please select a gender.</div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary w-100">Register</button>
+                        </div>
+                        <p class="text-center mt-3"><a href="#">Already have an account?</a></p>
+                    </form>
+
+                    <!-- Doctor Login Form (Initially Hidden) -->
+                    <form id="doctor-login-form" style="display: none;" novalidate><br>
+                        <div class="col-md-8 mb-3">
+                            <input type="text" class="form-control" id="doctor-login-id" placeholder="Doctor Login ID *">
+                            <div class="invalid-feedback">Please enter your Doctor Login ID.</div><br>
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <input type="password" class="form-control" id="doctor-password" placeholder="Password *">
+                            <div class="invalid-feedback">Please enter your password.</div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </div>
+                    </form>
+
+                    <!-- Receptionist Login Form (Initially Hidden) -->
+                    <form id="receptionist-login-form" style="display: none;" novalidate><br>
+                        <div class="col-md-8 mb-3">
+                            <input type="text" class="form-control" id="receptionist-login-id" placeholder="Receptionist Login ID *">
+                            <div class="invalid-feedback">Please enter your Receptionist Login ID.</div><br>
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <input type="password" class="form-control" id="receptionist-password" placeholder="Password *">
+                            <div class="invalid-feedback">Please enter your password.</div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for Form Toggle -->
+    <script>
+        // Switch between Patient, Doctor, Receptionist forms
+        document.querySelectorAll(".role-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const role = this.dataset.role;
+                document.querySelector("#role-title").textContent = role;
+
+                document.querySelectorAll(".role-btn").forEach(btn => {
+                    btn.classList.remove("btn-primary");
+                    btn.classList.add("btn-outline-primary");
+                });
+                this.classList.remove("btn-outline-primary");
+                this.classList.add("btn-primary");
+
+                // Hide all forms first
+                document.querySelector("#registration-form").style.display = "none";
+                document.querySelector("#doctor-login-form").style.display = "none";
+                document.querySelector("#receptionist-login-form").style.display = "none";
+
+                // Show the relevant form
+                if (role === "Patient") {
+                    document.querySelector("#registration-form").style.display = "block";
+                } else if (role === "Doctor") {
+                    document.querySelector("#doctor-login-form").style.display = "block";
+                } else if (role === "Receptionist") {
+                    document.querySelector("#receptionist-login-form").style.display = "block";
+                }
+            });
+        });
+
+        // Form Validation Logic
+        document.querySelector("#registration-form").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent form submission
+            let isValid = true;
+            const firstName = document.getElementById("first-name");
+            const lastName = document.getElementById("last-name");
+            const email = document.getElementById("email");
+            const phone = document.getElementById("phone");
+            const password = document.getElementById("password");
+            const confirmPassword = document.getElementById("confirm-password");
+            const genderMale = document.getElementById("gender-male");
+            const genderFemale = document.getElementById("gender-female");
+            const state = document.getElementById("state");
+            const city = document.getElementById("city")
+
+            // First Name
+            if (!firstName.value.trim()) {
+                isValid = false;
+                firstName.classList.add("is-invalid");
+            } else {
+                firstName.classList.remove("is-invalid");
+            }
+
+            // Last Name
+            if (!lastName.value.trim()) {
+                isValid = false;
+                lastName.classList.add("is-invalid");
+            } else {
+                lastName.classList.remove("is-invalid");
+            }
+
+            // State Name
+            if (!state.value.trim()) {
+                isValid = false;
+                state.classList.add("is-invalid");
+            } else {
+                state.classList.remove("is-invalid");
+            }
+
+            //ctiy Name
+            if (!city.value.trim()) {
+                isValid = false;
+                city.classList.add("is-invalid");
+            } else {
+                city.classList.remove("is-invalid");
+            }
+
+            // Email Validation
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!email.value.trim() || !emailPattern.test(email.value)) {
+                isValid = false;
+                email.classList.add("is-invalid");
+            } else {
+                email.classList.remove("is-invalid");
+            }
+
+            // Phone Validation
+            const phonePattern = /^\d{10}$/;
+            if (!phone.value.trim() || !phonePattern.test(phone.value)) {
+                isValid = false;
+                phone.classList.add("is-invalid");
+            } else {
+                phone.classList.remove("is-invalid");
+            }
+
+            // Password Validation
+            if (password.value.length < 6) {
+                isValid = false;
+                password.classList.add("is-invalid");
+            } else {
+                password.classList.remove("is-invalid");
+            }
+
+            // Confirm Password Validation
+            if (confirmPassword.value !== password.value) {
+                isValid = false;
+                confirmPassword.classList.add("is-invalid");
+            } else {
+                confirmPassword.classList.remove("is-invalid");
+            }
+
+            // Gender Validation
+            if (!genderMale.checked && !genderFemale.checked) {
+                isValid = false;
+                document.querySelector(".invalid-feedback").style.display = "block";
+            } else {
+                document.querySelector(".invalid-feedback").style.display = "none";
+            }
+
+            // Submit if valid
+            if (isValid) {
+                alert("Form is valid and ready to be submitted.");
+            }
+        });
+    </script>
+    <style>
+        body {
+            background: linear-gradient(to right, #2E3192, #1BFFFF);
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-group .btn {
+            border-radius: 0;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .is-invalid {
+            border-color: #dc3545;
+        }
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+        }
+    </style>
+
+</body>
+</html>
