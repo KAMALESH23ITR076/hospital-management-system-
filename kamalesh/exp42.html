@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Dosage Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
     <div class="container">
@@ -27,7 +27,9 @@
             <p id="result"></p>
         </div>
     </div>
-    <style>body {
+    <style>
+
+    body {
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
@@ -96,8 +98,13 @@
     #result {
         font-weight: bold;
         color: #007bff;
-    }</style>
-    <script >function calculateDosage() {
+    }
+    
+    </style>
+
+    <script >
+    
+    function calculateDosage() {
         // Get input values
         const weight = parseFloat(document.getElementById('weight').value);
         const dosage = parseFloat(document.getElementById('dosage').value);
