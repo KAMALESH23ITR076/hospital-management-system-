@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Billing & GPA Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        }
+        
+        .bill-item:hover {
+            background-color: #f8fafc;
+            transform: translateY(-2px);
+        }
+        
+        .gpa-input:focus {
+            box-shadow: 0 0 0 2px #3b82f6;
+        }
+        
+        .tab-active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-hospital text-blue-600 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-blue-900">MediCare</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-blue-600">Dashboard</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Patients</a>
+                <a href="#" class="text-blue-600 font-medium">Billing</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Pharmacy</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Education</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hidden md:block text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                        <i class="fas fa-user text-blue-600"></i>
+                    </div>
+                    <span class="hidden md:inline text-gray-700">Dr. Smith</span>
+                </div>
+            </div>
+            
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Sidebar - Patient Info -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Patient Information</h2>
+                    
+                    <!-- Patient Search -->
+                    <div class="relative mb-6">
+                        <input type="text" placeholder="Search patients..." class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Current Patient -->
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Patient" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-bold">John Peterson</h3>
+                                <p class="text-sm text-gray-600">ID: MED-2023-00145</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <p class="text-gray-500">Age</p>
+                                <p class="font-medium">32 years</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Gender</p>
+                                <p class="font-medium">Male</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Blood Type</p>
+                                <p class="font-medium">O+</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Last Visit</p>
+                                <p class="font-medium">Jun 15, 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Insurance Info -->
+                    <div class="border border-gray-200 rounded-lg p-4 mb-6">
+                        <h4 class="font-bold text-gray-800 mb-2">Insurance Information</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Provider:</span>
+                                <span class="font-medium">BlueCross BlueShield</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Policy No:</span>
+                                <span class="font-medium">BCBS-8745-2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Expiry:</span>
+                                <span class="font-medium">Dec 31, 2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Coverage:</span>
+                                <span class="font-medium">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-3">Quick Actions</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-file-invoice mr-2"></i> New Bill
+                            </button>
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-prescription mr-2"></i> Prescription
+                            </button>
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-notes-medical mr-2"></i> Report
+                            </button>
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-calendar-plus mr-2"></i> Appointment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Content - Billing & GPA Calculator -->
+            <div class="lg:w-2/3">
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-200 mb-6">
+                    <button class="tab-active px-4 py-2 mr-2 text-gray-700">Billing</button>
+                    <button class="px-4 py-2 mr-2 text-gray-500 hover:text-blue-600">Payment History</button>
+                    <button class="px-4 py-2 text-gray-500 hover:text-blue-600">GPA Calculator</button>
+                </div>
+                
+                <!-- Billing Section -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Current Bill</h2>
+                        <div class="flex space-x-3">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                                <i class="fas fa-print mr-1"></i> Print
+                            </button>
+                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                                <i class="fas fa-paper-plane mr-1"></i> Send
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Bill Details -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden mb-6">
+                        <!-- Bill Header -->
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-500 text-sm">Bill No</p>
+                                <p class="font-medium">MED-BILL-2023-00145</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Date</p>
+                                <p class="font-medium">June 18, 2023</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Status</p>
+                                <p class="font-medium text-green-600">Pending</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Bill Items -->
+                        <div class="divide-y divide-gray-200">
+                            <div class="bill-item px-4 py-3 flex justify-between items-center transition duration-200">
+                                <div>
+                                    <p class="font-medium">Consultation Fee</p>
+                                    <p class="text-sm text-gray-500">Dr. Smith - Cardiology</p>
+                                </div>
+                                <p class="font-medium">$120.00</p>
+                            </div>
+                            
+                            <div class="bill-item px-4 py-3 flex justify-between items-center transition duration-200">
+                                <div>
+                                    <p class="font-medium">ECG Test</p>
+                                    <p class="text-sm text-gray-500">Diagnostic Center</p>
+                                </div>
+                                <p class="font-medium">$85.50</p>
+                            </div>
+                            
+                            <div class="bill-item px-4 py-3 flex justify-between items-center transition duration-200">
+                                <div>
+                                    <p class="font-medium">Blood Tests</p>
+                                    <p class="text-sm text-gray-500">CBC, Lipid Profile, Glucose</p>
+                                </div>
+                                <p class="font-medium">$65.75</p>
+                            </div>
+                            
+                            <div class="bill-item px-4 py-3 flex justify-between items-center transition duration-200">
+                                <div>
+                                    <p class="font-medium">Medication</p>
+                                    <p class="text-sm text-gray-500">Atorvastatin 20mg (30 tablets)</p>
+                                </div>
+                                <p class="font-medium">$42.30</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Bill Summary -->
+                        <div class="bg-gray-50 px-4 py-3 border-t border-gray-200">
+                            <div class="flex justify-between mb-2">
+                                <p class="text-gray-600">Subtotal:</p>
+                                <p class="font-medium">$313.55</p>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <p class="text-gray-600">Insurance Coverage (80%):</p>
+                                <p class="font-medium text-green-600">-$250.84</p>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <p class="text-gray-600">Tax (5%):</p>
+                                <p class="font-medium">$3.14</p>
+                            </div>
+                            <div class="flex justify-between text-lg font-bold">
+                                <p>Total Due:</p>
+                                <p>$65.85</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Options -->
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Payment Options</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="border border-gray-200 rounded-lg p-4 flex flex-col items-center cursor-pointer hover:border-blue-500">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                                    <i class="fas fa-credit-card text-blue-600 text-xl"></i>
+                                </div>
+                                <p class="font-medium">Credit/Debit Card</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4 flex flex-col items-center cursor-pointer hover:border-blue-500">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                                    <i class="fas fa-university text-blue-600 text-xl"></i>
+                                </div>
+                                <p class="font-medium">Bank Transfer</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4 flex flex-col items-center cursor-pointer hover:border-blue-500">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                                    <i class="fas fa-money-bill-wave text-blue-600 text-xl"></i>
+                                </div>
+                                <p class="font-medium">Cash Payment</p>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+                            Process Payment
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GPA Calculator Section (Hidden by default) -->
+                <div class="bg-white rounded-lg shadow-md p-6 hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Medical GPA Calculator</h2>
+                        <div class="flex space-x-2">
+                            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm">
+                                <i class="fas fa-question-circle mr-1"></i> Help
+                            </button>
+                            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm">
+                                <i class="fas fa-redo mr-1"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <h3 class="font-medium text-gray-700 mr-3">Calculator Type:</h3>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center">
+                                    <input type="radio" name="calcType" class="mr-2" checked>
+                                    <span>Semester GPA</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="calcType" class="mr-2">
+                                    <span>Cumulative CGPA</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Courses Input -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-medium text-gray-700">Courses</h3>
+                            <button id="addCourse" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                <i class="fas fa-plus mr-1"></i> Add Course
+                            </button>
+                        </div>
+
+                        <div id="coursesContainer">
+                            <!-- Course Row Template -->
+                            <div class="course-row grid grid-cols-12 gap-3 mb-3">
+                                <div class="col-span-5">
+                                    <input type="text" placeholder="Course Name" class="w-full px-3 py-2 border rounded gpa-input">
+                                </div>
+                                <div class="col-span-2">
+                                    <input type="number" placeholder="Credits" class="w-full px-3 py-2 border rounded gpa-input" min="1" max="10">
+                                </div>
+                                <div class="col-span-3">
+                                    <select class="w-full px-3 py-2 border rounded gpa-input">
+                                        <option value="">Select Grade</option>
+                                        <option value="4">A (4.0)</option>
+                                        <option value="3.7">A- (3.7)</option>
+                                        <option value="3.3">B+ (3.3)</option>
+                                        <option value="3">B (3.0)</option>
+                                        <option value="2.7">B- (2.7)</option>
+                                        <option value="2.3">C+ (2.3)</option>
+                                        <option value="2">C (2.0)</option>
+                                        <option value="1.7">C- (1.7)</option>
+                                        <option value="1.3">D+ (1.3)</option>
+                                        <option value="1">D (1.0)</option>
+                                        <option value="0">F (0.0)</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-2 flex items-center justify-center">
+                                    <button class="remove-course text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Previous CGPA (for CGPA calculation) -->
+                    <div id="prevCGPA" class="mb-6 hidden">
+                        <h3 class="font-medium text-gray-700 mb-2">Previous CGPA Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Previous CGPA</label>
+                                <input type="number" step="0.01" min="0" max="4" placeholder="0.00" class="w-full px-3 py-2 border rounded gpa-input">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Total Credits Completed</label>
+                                <input type="number" min="0" placeholder="0" class="w-full px-3 py-2 border rounded gpa-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <div class="flex justify-center mb-6">
+                        <button id="calculateGPA" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium">
+                            Calculate GPA
+                        </button>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div id="results" class="hidden">
+                        <div class="gradient-bg text-white rounded-lg p-6 mb-4">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm opacity-80">Your GPA is</p>
+                                    <p class="text-4xl font-bold">3.72</p>
+                                    <p class="text-sm opacity-80">on a 4.0 scale</p>
+                                </div>
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-award text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-3">Detailed Breakdown</h4>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p class="text-gray-600">Total Credits:</p>
+                                    <p class="font-medium">15</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">Quality Points:</p>
+                                    <p class="font-medium">55.8</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">Highest Grade:</p>
+                                    <p class="font-medium">A (Pathology)</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">Lowest Grade:</p>
+                                    <p class="font-medium">B+ (Pharmacology)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-hospital text-blue-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">MediCare</span>
+                    </div>
+                    <p class="text-gray-400">Comprehensive healthcare management with integrated educational tools.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Dashboard</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Patient Records</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Billing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Medical Education</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">API Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">System Status</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-500 mr-2"></i>
+                            <span class="text-gray-400">support@medicare.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-blue-500 mr-2"></i>
+                            <span class="text-gray-400">+1 (800) 555-HELP</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                            <span class="text-gray-400">123 Medical Plaza, Boston</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.flex.border-b button');
+        const sections = document.querySelectorAll('.lg\\:w-2\\/3 > div.bg-white');
+        
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                // Update tab styles
+                tabs.forEach(t => {
+                    t.classList.remove('tab-active');
+                    t.classList.add('text-gray-500', 'hover:text-blue-600');
+                });
+                tab.classList.add('tab-active');
+                tab.classList.remove('text-gray-500', 'hover:text-blue-600');
+                
+                // Show/hide sections
+                sections.forEach(section => section.classList.add('hidden'));
+                sections[index].classList.remove('hidden');
+            });
+        });
+        
+        // GPA Calculator Functionality
+        document.getElementById('addCourse').addEventListener('click', () => {
+            const courseRow = document.createElement('div');
+            courseRow.className = 'course-row grid grid-cols-12 gap-3 mb-3';
+            courseRow.innerHTML = `
+                <div class="col-span-5">
+                    <input type="text" placeholder="Course Name" class="w-full px-3 py-2 border rounded gpa-input">
+                </div>
+                <div class="col-span-2">
+                    <input type="number" placeholder="Credits" class="w-full px-3 py-2 border rounded gpa-input" min="1" max="10">
+                </div>
+                <div class="col-span-3">
+                    <select class="w-full px-3 py-2 border rounded gpa-input">
+                        <option value="">Select Grade</option>
+                        <option value="4">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2">C (2.0)</option>
+                        <option value="1.7">C- (1.7)</option>
+                        <option value="1.3">D+ (1.3)</option>
+                        <option value="1">D (1.0)</option>
+                        <option value="0">F (0.0)</option>
+                    </select>
+                </div>
+                <div class="col-span-2 flex items-center justify-center">
+                    <button class="remove-course text-red-500 hover:text-red-700">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('coursesContainer').appendChild(courseRow);
+            
+            // Add event listener to the new remove button
+            courseRow.querySelector('.remove-course').addEventListener('click', () => {
+                courseRow.remove();
+            });
+        });
+        
+        // Show/hide previous CGPA fields based on calculator type
+        const calcTypeRadios = document.querySelectorAll('input[name="calcType"]');
+        const prevCGPA = document.getElementById('prevCGPA');
+        
+        calcTypeRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.nextElementSibling.textContent === 'Cumulative CGPA') {
+                    prevCGPA.classList.remove('hidden');
+                } else {
+                    prevCGPA.classList.add('hidden');
+                }
+            });
+        });
+        
+        // GPA Calculation
+        document.getElementById('calculateGPA').addEventListener('click', () => {
+            const courseRows = document.querySelectorAll('.course-row');
+            let totalCredits = 0;
+            let totalQualityPoints = 0;
+            let highestGrade = { value: 0, course: '' };
+            let lowestGrade = { value: 4, course: '' };
+            
+            // Validate and calculate
+            let isValid = true;
+            courseRows.forEach(row => {
+                const creditsInput = row.querySelector('input[type="number"]');
+                const gradeSelect = row.querySelector('select');
+                const courseNameInput = row.querySelector('input[type="text"]');
+                
+                if (!creditsInput.value || !gradeSelect.value || !courseNameInput.value) {
+                    isValid = false;
+                    return;
+                }
+                
+                const credits = parseFloat(creditsInput.value);
+                const gradeValue = parseFloat(gradeSelect.value);
+                const courseName = courseNameInput.value;
+                
+                totalCredits += credits;
+                totalQualityPoints += credits * gradeValue;
+                
+                // Track highest and lowest grades
+                if (gradeValue > highestGrade.value) {
+                    highestGrade = { value: gradeValue, course: courseName };
+                }
+                if (gradeValue < lowestGrade.value) {
+                    lowestGrade = { value: gradeValue, course: courseName };
+                }
+            });
+            
+            if (!isValid || courseRows.length === 0) {
+                alert('Please fill in all fields for all courses');
+                return;
+            }
+            
+            // For CGPA calculation
+            const isCGPA = document.querySelector('input[name="calcType"]:checked').nextElementSibling.textContent === 'Cumulative CGPA';
+            
+            if (isCGPA) {
+                const prevCGPAValue = parseFloat(prevCGPA.querySelector('input[type="number"]').value) || 0;
+                const prevCredits = parseFloat(prevCGPA.querySelectorAll('input[type="number"]')[1].value) || 0;
+                
+                if (prevCredits > 0) {
+                    totalQualityPoints += prevCGPAValue * prevCredits;
+                    totalCredits += prevCredits;
+                }
+            }
+            
+            const gpa = totalQualityPoints / totalCredits;
+            
+            // Display results
+            const results = document.getElementById('results');
+            results.querySelector('.text-4xl').textContent = gpa.toFixed(2);
+            
+            const details = results.querySelector('.grid.grid-cols-2.gap-4');
+            details.children[0].querySelector('.font-medium').textContent = totalCredits;
+            details.children[1].querySelector('.font-medium').textContent = totalQualityPoints.toFixed(1);
+            details.children[2].querySelector('.font-medium').textContent = `${getGradeLetter(highestGrade.value)} (${highestGrade.course})`;
+            details.children[3].querySelector('.font-medium').textContent = `${getGradeLetter(lowestGrade.value)} (${lowestGrade.course})`;
+            
+            results.classList.remove('hidden');
+            results.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Helper function to convert grade value to letter
+        function getGradeLetter(value) {
+            const gradeMap = {
+                4: 'A',
+                3.7: 'A-',
+                3.3: 'B+',
+                3: 'B',
+                2.7: 'B-',
+                2.3: 'C+',
+                2: 'C',
+                1.7: 'C-',
+                1.3: 'D+',
+                1: 'D',
+                0: 'F'
+            };
+            
+            // Find the closest match
+            const possibleGrades = Object.keys(gradeMap).map(Number);
+            const closest = possibleGrades.reduce((prev, curr) => {
+                return (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+            });
+            
+            return gradeMap[closest];
+        }
+    </script>
+</body>
+</html>

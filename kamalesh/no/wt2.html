@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Pharmacy Bill Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hospital Pharmacy Bill Calculator</h2>
+        <label>Medicine Name:</label>
+        <input type="text" id="medicineName">
+        <span class="error" id="medicineError"></span>
+        <br><br>
+        <label>Price per unit:</label>
+        <input type="number" id="unitPrice">
+        <span class="error" id="unitPriceError"></span>
+        <br><br>
+        <label>Quantity:</label>
+        <input type="number" id="quantity">
+        <span class="error" id="quantityError"></span>
+        <br><br>
+        <button onclick="calculateBill()">Calculate Total</button>
+        <h3>Total Bill: ₹<span id="totalBill">0</span></h3>
+    </div>
+
+    <script>
+        function calculateBill() {
+            let medicineName = document.getElementById("medicineName").value;
+            let unitPrice = document.getElementById("unitPrice").value;
+            let quantity = document.getElementById("quantity").value;
+            let valid = true;
+
+            if (medicineName.trim() === "") {
+                document.getElementById("medicineError").textContent = "Medicine name is required";
+                valid = false;
+            } else {
+                document.getElementById("medicineError").textContent = "";
+            }
+
+            if (unitPrice <= 0) {
+                document.getElementById("unitPriceError").textContent = "Enter a valid price";
+                valid = false;
+            } else {
+                document.getElementById("unitPriceError").textContent = "";
+            }
+
+            if (quantity <= 0) {
+                document.getElementById("quantityError").textContent = "Enter a valid quantity";
+                valid = false;
+            } else {
+                document.getElementById("quantityError").textContent = "";
+            }
+
+            if (!valid) return;
+            
+            let total = unitPrice * quantity;
+            document.getElementById("totalBill").textContent = total;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediCare+ Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md mx-auto">
+    <div class="bg-blue-600 text-white p-6 rounded-t-xl text-center">
+      <i class="fas fa-hospital text-3xl"></i>
+      <h1 class="text-3xl font-bold mt-2">MediCare+</h1>
+      <p>Hospital Management System</p>
+    </div>
+    <div class="bg-white p-8 rounded-b-xl shadow">
+      <form id="loginForm" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Username</label>
+          <input type="text" id="username" required class="mt-1 block w-full px-3 py-2 border rounded-md">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" required class="mt-1 block w-full px-3 py-2 border rounded-md">
+        </div>
+        <div class="flex items-center justify-between">
+          <label class="flex items-center text-sm">
+            <input type="checkbox" id="remember-me" class="mr-2"> Remember me
+          </label>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md">Sign In</button>
+        <p id="response" class="text-center text-sm mt-2"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const rememberMe = document.getElementById('remember-me').checked;
+      const responseMsg = document.getElementById('response');
+
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, rememberMe })
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('Invalid login');
+          return res.json();
+        })
+        .then(data => {
+          responseMsg.textContent = data.message;
+          responseMsg.className = 'text-green-600 text-center mt-2';
+        })
+        .catch(err => {
+          responseMsg.textContent = 'Login failed. Try again.';
+          responseMsg.className = 'text-red-600 text-center mt-2';
+        });
+    });
+  </script>
+</body>
+</html>

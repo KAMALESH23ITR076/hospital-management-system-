@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MediCare Hospital Management System</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="scripts.js"></script>
+        
+    </head>
+    <body>
+
+
+
+
+
+
+
+
+
+
+
+<header class="hospital-header">
+    <div class="logo-container">
+        <img src="hospital-logo.png" alt="Hospital Logo" class="logo">
+        <h1>MediCare Hospital Management System</h1>
+    </div>
+    <div class="header-actions">
+        <div class="emergency-contact">
+            <i class="fas fa-phone-alt"></i>
+            <span>Emergency: 911</span>
+        </div>
+        <div class="user-controls">
+            <button class="btn login-btn">Login</button>
+            <button class="btn register-btn">Register</button>
+            <div class="language-selector">
+                <select>
+                    <option>English</option>
+                    <option>Español</option>
+                    <option>Français</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+<nav class="main-nav">
+    <ul>
+        <li class="active"><a href="#"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+        <li><a href="#"><i class="fas fa-user-md"></i> Doctors</a></li>
+        <li><a href="#"><i class="fas fa-procedures"></i> Departments</a></li>
+        <li><a href="#"><i class="fas fa-pills"></i> Pharmacy</a></li>
+        <li><a href="#"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+        <li><a href="#"><i class="fas fa-dollar-sign"></i> Billing</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+    <div class="search-box">
+        <input type="text" placeholder="Search patients, doctors, services...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+
+<main class="hospital-main">
+    <!-- Hero Section -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h2>Your Health is Our Priority</h2>
+            <p>Comprehensive healthcare services with state-of-the-art facilities</p>
+            <div class="hero-actions">
+                <button class="btn primary-btn">Book Appointment</button>
+                <button class="btn secondary-btn">Find a Doctor</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="hospital-hero.jpg" alt="Hospital Facility">
+        </div>
+    </section>
+
+    <!-- Quick Access Cards -->
+    <section class="quick-access">
+        <h3>Quick Access</h3>
+        <div class="access-cards">
+            <div class="access-card">
+                <i class="fas fa-calendar-check"></i>
+                <h4>Appointments</h4>
+                <p>Schedule, reschedule or cancel appointments</p>
+                <button class="btn card-btn">Manage</button>
+            </div>
+            <div class="access-card">
+                <i class="fas fa-file-prescription"></i>
+                <h4>Prescriptions</h4>
+                <p>View and refill your prescriptions</p>
+                <button class="btn card-btn">View</button>
+            </div>
+            <div class="access-card">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <h4>Billing</h4>
+                <p>Pay bills and view payment history</p>
+                <button class="btn card-btn">Pay Now</button>
+            </div>
+            <div class="access-card">
+                <i class="fas fa-notes-medical"></i>
+                <h4>Medical Records</h4>
+                <p>Access your complete health history</p>
+                <button class="btn card-btn">View Records</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <h3>Our Services</h3>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="emergency-icon.jpg" alt="Emergency">
+                <h4>Emergency Care</h4>
+                <p>24/7 emergency services with rapid response</p>
+            </div>
+            <div class="service-card">
+                <img src="surgery-icon.jpg" alt="Surgery">
+                <h4>Surgical Services</h4>
+                <p>Advanced surgical procedures</p>
+            </div>
+            <div class="service-card">
+                <img src="maternity-icon.jpg" alt="Maternity">
+                <h4>Maternity Care</h4>
+                <p>Comprehensive care for mothers and babies</p>
+            </div>
+            <div class="service-card">
+                <img src="cardiology-icon.jpg" alt="Cardiology">
+                <h4>Cardiology</h4>
+                <p>Heart care and treatment</p>
+            </div>
+            <div class="service-card">
+                <img src="radiology-icon.jpg" alt="Radiology">
+                <h4>Radiology</h4>
+                <p>Diagnostic imaging services</p>
+            </div>
+            <div class="service-card">
+                <img src="pharmacy-icon.jpg" alt="Pharmacy">
+                <h4>Pharmacy</h4>
+                <p>In-house pharmacy services</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor Availability Section -->
+    <section class="doctor-availability">
+        <h3>Doctor Availability Today</h3>
+        <div class="doctor-slider">
+            <!-- Doctor cards would be dynamically loaded here -->
+            <div class="doctor-card">
+                <img src="doctor1.jpg" alt="Dr. Smith">
+                <h4>Dr. John Smith</h4>
+                <p>Cardiology</p>
+                <div class="availability">
+                    <span class="available">Available: 9AM - 4PM</span>
+                </div>
+                <button class="btn book-btn">Book Now</button>
+            </div>
+            <!-- More doctor cards -->
+        </div>
+    </section>
+
+    <!-- Patient Portal Section -->
+    <section class="patient-portal">
+        <div class="portal-info">
+            <h3>Patient Portal</h3>
+            <p>Access your medical records, test results, appointments and more through our secure patient portal.</p>
+            <ul class="portal-features">
+                <li><i class="fas fa-check"></i> View lab results</li>
+                <li><i class="fas fa-check"></i> Message your doctor</li>
+                <li><i class="fas fa-check"></i> Request prescription refills</li>
+                <li><i class="fas fa-check"></i> Manage appointments</li>
+                <li><i class="fas fa-check"></i> Pay bills online</li>
+            </ul>
+            <button class="btn portal-btn">Access Portal</button>
+        </div>
+        <div class="portal-image">
+            <img src="patient-portal.jpg" alt="Patient Portal">
+        </div>
+    </section>
+
+    <!-- Health Tips Section -->
+    <section class="health-tips">
+        <h3>Health Tips & News</h3>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <img src="covid-tip.jpg" alt="COVID-19">
+                <h4>COVID-19 Prevention</h4>
+                <p>Latest guidelines for staying safe during the pandemic</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="tip-card">
+                <img src="diet-tip.jpg" alt="Healthy Diet">
+                <h4>Healthy Eating Habits</h4>
+                <p>Nutrition tips for a balanced diet</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="tip-card">
+                <img src="exercise-tip.jpg" alt="Exercise">
+                <h4>Exercise for Heart Health</h4>
+                <p>Best exercises to keep your heart strong</p>
+                <a href="#">Read More</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+<main class="hospital-main">
+    <!-- Hero Section -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h2>Your Health is Our Priority</h2>
+            <p>Comprehensive healthcare services with state-of-the-art facilities</p>
+            <div class="hero-actions">
+                <button class="btn primary-btn">Book Appointment</button>
+                <button class="btn secondary-btn">Find a Doctor</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="hospital-hero.jpg" alt="Hospital Facility">
+        </div>
+    </section>
+
+    <!-- Quick Access Cards -->
+    <section class="quick-access">
+        <h3>Quick Access</h3>
+        <div class="access-cards">
+            <div class="access-card">
+                <i class="fas fa-calendar-check"></i>
+                <h4>Appointments</h4>
+                <p>Schedule, reschedule or cancel appointments</p>
+                <button class="btn card-btn">Manage</button>
+            </div>
+            <div class="access-card">
+                <i class="fas fa-file-prescription"></i>
+                <h4>Prescriptions</h4>
+                <p>View and refill your prescriptions</p>
+                <button class="btn card-btn">View</button>
+            </div>
+            <div class="access-card">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <h4>Billing</h4>
+                <p>Pay bills and view payment history</p>
+                <button class="btn card-btn">Pay Now</button>
+            </div>
+            <div class="access-card">
+                <i class="fas fa-notes-medical"></i>
+                <h4>Medical Records</h4>
+                <p>Access your complete health history</p>
+                <button class="btn card-btn">View Records</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <h3>Our Services</h3>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="emergency-icon.jpg" alt="Emergency">
+                <h4>Emergency Care</h4>
+                <p>24/7 emergency services with rapid response</p>
+            </div>
+            <div class="service-card">
+                <img src="surgery-icon.jpg" alt="Surgery">
+                <h4>Surgical Services</h4>
+                <p>Advanced surgical procedures</p>
+            </div>
+            <div class="service-card">
+                <img src="maternity-icon.jpg" alt="Maternity">
+                <h4>Maternity Care</h4>
+                <p>Comprehensive care for mothers and babies</p>
+            </div>
+            <div class="service-card">
+                <img src="cardiology-icon.jpg" alt="Cardiology">
+                <h4>Cardiology</h4>
+                <p>Heart care and treatment</p>
+            </div>
+            <div class="service-card">
+                <img src="radiology-icon.jpg" alt="Radiology">
+                <h4>Radiology</h4>
+                <p>Diagnostic imaging services</p>
+            </div>
+            <div class="service-card">
+                <img src="pharmacy-icon.jpg" alt="Pharmacy">
+                <h4>Pharmacy</h4>
+                <p>In-house pharmacy services</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor Availability Section -->
+    <section class="doctor-availability">
+        <h3>Doctor Availability Today</h3>
+        <div class="doctor-slider">
+            <!-- Doctor cards would be dynamically loaded here -->
+            <div class="doctor-card">
+                <img src="doctor1.jpg" alt="Dr. Smith">
+                <h4>Dr. John Smith</h4>
+                <p>Cardiology</p>
+                <div class="availability">
+                    <span class="available">Available: 9AM - 4PM</span>
+                </div>
+                <button class="btn book-btn">Book Now</button>
+            </div>
+            <!-- More doctor cards -->
+        </div>
+    </section>
+
+    <!-- Patient Portal Section -->
+    <section class="patient-portal">
+        <div class="portal-info">
+            <h3>Patient Portal</h3>
+            <p>Access your medical records, test results, appointments and more through our secure patient portal.</p>
+            <ul class="portal-features">
+                <li><i class="fas fa-check"></i> View lab results</li>
+                <li><i class="fas fa-check"></i> Message your doctor</li>
+                <li><i class="fas fa-check"></i> Request prescription refills</li>
+                <li><i class="fas fa-check"></i> Manage appointments</li>
+                <li><i class="fas fa-check"></i> Pay bills online</li>
+            </ul>
+            <button class="btn portal-btn">Access Portal</button>
+        </div>
+        <div class="portal-image">
+            <img src="patient-portal.jpg" alt="Patient Portal">
+        </div>
+    </section>
+
+    <!-- Health Tips Section -->
+    <section class="health-tips">
+        <h3>Health Tips & News</h3>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <img src="covid-tip.jpg" alt="COVID-19">
+                <h4>COVID-19 Prevention</h4>
+                <p>Latest guidelines for staying safe during the pandemic</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="tip-card">
+                <img src="diet-tip.jpg" alt="Healthy Diet">
+                <h4>Healthy Eating Habits</h4>
+                <p>Nutrition tips for a balanced diet</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="tip-card">
+                <img src="exercise-tip.jpg" alt="Exercise">
+                <h4>Exercise for Heart Health</h4>
+                <p>Best exercises to keep your heart strong</p>
+                <a href="#">Read More</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+
+
+
+<footer class="hospital-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Departments</h4>
+            <ul>
+                <li><a href="#">Cardiology</a></li>
+                <li><a href="#">Neurology</a></li>
+                <li><a href="#">Orthopedics</a></li>
+                <li><a href="#">Pediatrics</a></li>
+                <li><a href="#">Radiology</a></li>
+                <li><a href="#">Emergency</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <address>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Health City, HC 12345</p>
+                <p><i class="fas fa-phone-alt"></i> Main: (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@medicarehospital.com</p>
+            </address>
+            <div class="social-media">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Emergency Contacts</h4>
+            <ul class="emergency-contacts">
+                <li>Ambulance: 911</li>
+                <li>Emergency Room: (123) 456-7891</li>
+                <li>Poison Control: (123) 456-7892</li>
+                <li>Mental Health Crisis: (123) 456-7893</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 MediCare Hospital Management System. All rights reserved.</p>
+        <div class="legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">HIPAA Compliance</a>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="hospital-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Departments</h4>
+            <ul>
+                <li><a href="#">Cardiology</a></li>
+                <li><a href="#">Neurology</a></li>
+                <li><a href="#">Orthopedics</a></li>
+                <li><a href="#">Pediatrics</a></li>
+                <li><a href="#">Radiology</a></li>
+                <li><a href="#">Emergency</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <address>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Health City, HC 12345</p>
+                <p><i class="fas fa-phone-alt"></i> Main: (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@medicarehospital.com</p>
+            </address>
+            <div class="social-media">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Emergency Contacts</h4>
+            <ul class="emergency-contacts">
+                <li>Ambulance: 911</li>
+                <li>Emergency Room: (123) 456-7891</li>
+                <li>Poison Control: (123) 456-7892</li>
+                <li>Mental Health Crisis: (123) 456-7893</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 MediCare Hospital Management System. All rights reserved.</p>
+        <div class="legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">HIPAA Compliance</a>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="emergency-alert">
+    <button class="emergency-btn">
+        <i class="fas fa-bell"></i> Emergency Alert
+    </button>
+    <div class="emergency-modal">
+        <h4>Emergency Assistance</h4>
+        <p>Please describe your emergency:</p>
+        <textarea placeholder="Briefly describe the emergency..."></textarea>
+        <div class="emergency-actions">
+            <button class="btn call-911">Call 911</button>
+            <button class="btn notify-hospital">Notify Hospital</button>
+            <button class="btn cancel-emergency">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="appointment-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Book an Appointment</h3>
+        <form id="appointment-form">
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" required>
+                    <option value="">Select Department</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="neurology">Neurology</option>
+                    <!-- More options -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="doctor">Doctor</label>
+                <select id="doctor" required>
+                    <option value="">Select Doctor</option>
+                    <!-- Dynamically populated based on department -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time</label>
+                <select id="time" required>
+                    <option value="">Select Time Slot</option>
+                    <!-- Dynamically populated based on doctor availability -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reason">Reason for Visit</label>
+                <textarea id="reason" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn submit-btn">Book Appointment</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hospital-map">
+    <h3>Our Facility</h3>
+    <div class="map-container">
+        <img src="hospital-map.jpg" alt="Hospital Map" usemap="#hospitalmap">
+        <map name="hospitalmap">
+            <area shape="rect" coords="34,44,270,350" alt="Emergency" href="#">
+            <area shape="rect" coords="290,172,333,250" alt="Pharmacy" href="#">
+            <!-- More map areas -->
+        </map>
+    </div>
+    <div class="map-legend">
+        <div class="legend-item"><span class="emergency-color"></span> Emergency</div>
+        <div class="legend-item"><span class="pharmacy-color"></span> Pharmacy</div>
+        <!-- More legend items -->
+    </div>
+</div>
+
+
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

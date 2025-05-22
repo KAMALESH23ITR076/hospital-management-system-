@@ -1,0 +1,977 @@
+/* Global Styles */
+:root {
+    --primary-color: #2a7fba;
+    --secondary-color: #3bb77e;
+    --accent-color: #ff6b6b;
+    --dark-color: #333;
+    --light-color: #f8f9fa;
+    --gray-color: #6c757d;
+    --white: #fff;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+  }
+  
+  .primary-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  .primary-btn:hover {
+    background-color: #1e6fa0;
+  }
+  
+  .secondary-btn {
+    background-color: var(--secondary-color);
+    color: var(--white);
+  }
+  
+  .secondary-btn:hover {
+    background-color: #2da56b;
+  }
+  
+  .card-btn {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+  
+  .card-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* Header Styles */
+  .hospital-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--white);
+    box-shadow: var(--box-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .hospital-header h1 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .emergency-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+  
+  .user-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .login-btn, .register-btn {
+    padding: 0.5rem 1rem;
+  }
+  
+  .login-btn {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+  
+  .login-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  .register-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  .register-btn:hover {
+    background-color: #1e6fa0;
+  }
+  
+  .language-selector select {
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: 1px solid var(--gray-color);
+  }
+  
+  /* Navigation Styles */
+  .main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 0 2rem;
+  }
+  
+  .main-nav ul {
+    display: flex;
+  }
+  
+  .main-nav li {
+    position: relative;
+  }
+  
+  .main-nav li a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--white);
+    transition: var(--transition);
+  }
+  
+  .main-nav li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .main-nav li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .main-nav li a i {
+    margin-right: 0.5rem;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-box input {
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    width: 250px;
+  }
+  
+  .search-box button {
+    padding: 0.6rem 1rem;
+    border: none;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+  }
+  
+  /* Hero Banner Styles */
+  .hero-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(42, 127, 186, 0.1) 0%, rgba(59, 183, 126, 0.1) 100%);
+  }
+  
+  .hero-content {
+    flex: 1;
+    max-width: 600px;
+  }
+  
+  .hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+  
+  .hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: var(--gray-color);
+  }
+  
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .hero-image {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  /* Quick Access Styles */
+  .quick-access {
+    padding: 3rem 2rem;
+  }
+  
+  .quick-access h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .access-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .access-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+  }
+  
+  .access-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .access-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .access-card h4 {
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+  }
+  
+  .access-card p {
+    color: var(--gray-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Services Section Styles */
+  .services-section {
+    padding: 3rem 2rem;
+    background-color: var(--white);
+  }
+  
+  .services-section h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .service-card {
+    background-color: var(--light-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .service-card h4 {
+    padding: 1rem;
+    color: var(--primary-color);
+  }
+  
+  .service-card p {
+    padding: 0 1rem 1.5rem;
+    color: var(--gray-color);
+  }
+  
+  /* Doctor Availability Styles */
+  .doctor-availability {
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(42, 127, 186, 0.1) 0%, rgba(59, 183, 126, 0.1) 100%);
+  }
+  
+  .doctor-availability h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .doctor-slider {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scrollbar-width: thin;
+  }
+  
+  .doctor-card {
+    min-width: 250px;
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .doctor-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--primary-color);
+  }
+  
+  .doctor-card h4 {
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+  }
+  
+  .doctor-card p {
+    color: var(--gray-color);
+    margin-bottom: 1rem;
+  }
+  
+  .availability {
+    margin-bottom: 1.5rem;
+  }
+  
+  .available {
+    color: var(--secondary-color);
+    font-weight: 500;
+  }
+  
+  .book-btn {
+    width: 100%;
+  }
+  
+  /* Patient Portal Styles */
+  .patient-portal {
+    display: flex;
+    align-items: center;
+    padding: 3rem 2rem;
+    background-color: var(--white);
+  }
+  
+  .portal-info {
+    flex: 1;
+    padding-right: 2rem;
+  }
+  
+  .portal-info h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+  }
+  
+  .portal-info p {
+    margin-bottom: 1.5rem;
+    color: var(--gray-color);
+  }
+  
+  .portal-features {
+    margin-bottom: 2rem;
+  }
+  
+  .portal-features li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .portal-features i {
+    margin-right: 0.8rem;
+    color: var(--secondary-color);
+  }
+  
+  .portal-image {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .portal-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .portal-btn {
+    padding: 0.8rem 2rem;
+  }
+  
+  /* Health Tips Styles */
+  .health-tips {
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(42, 127, 186, 0.1) 0%, rgba(59, 183, 126, 0.1) 100%);
+  }
+  
+  .health-tips h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .tip-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+  }
+  
+  .tip-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .tip-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .tip-card h4 {
+    padding: 1rem;
+    color: var(--primary-color);
+  }
+  
+  .tip-card p {
+    padding: 0 1rem 1rem;
+    color: var(--gray-color);
+  }
+  
+  .tip-card a {
+    display: inline-block;
+    padding: 0 1rem 1.5rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+  }
+  
+  /* Footer Styles */
+  .hospital-footer {
+    background-color: var(--dark-color);
+    color: var(--white);
+    padding: 3rem 2rem 0;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section h4 {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.8rem;
+  }
+  
+  .footer-section ul li a {
+    color: #ccc;
+    transition: var(--transition);
+  }
+  
+  .footer-section ul li a:hover {
+    color: var(--white);
+  }
+  
+  .address p {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .address i {
+    margin-right: 0.8rem;
+    color: var(--secondary-color);
+  }
+  
+  .social-media {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .social-media a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    transition: var(--transition);
+  }
+  
+  .social-media a:hover {
+    background-color: var(--primary-color);
+  }
+  
+  .emergency-contacts li {
+    margin-bottom: 0.8rem;
+    color: #ccc;
+  }
+  
+  .footer-bottom {
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: #ccc;
+  }
+  
+  .legal-links {
+    margin-top: 1rem;
+  }
+  
+  .legal-links a {
+    color: #ccc;
+    margin: 0 0.8rem;
+    transition: var(--transition);
+  }
+  
+  .legal-links a:hover {
+    color: var(--white);
+  }
+  
+  /* Live Chat Styles */
+  .live-chat {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 99;
+  }
+  
+  .chat-toggle {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .chat-toggle i {
+    font-size: 1.2rem;
+  }
+  
+  .chat-window {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 350px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    display: none;
+  }
+  
+  .chat-window.active {
+    display: block;
+  }
+  
+  .chat-header {
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-chat {
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  
+  .chat-messages {
+    height: 300px;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  
+  .chat-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+  }
+  
+  .chat-input button {
+    padding: 0.6rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+  }
+  
+  /* Emergency Alert Styles */
+  .emergency-alert {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 99;
+  }
+  
+  .emergency-btn {
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .emergency-btn i {
+    font-size: 1.2rem;
+  }
+  
+  .emergency-modal {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 350px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    display: none;
+  }
+  
+  .emergency-modal.active {
+    display: block;
+  }
+  
+  .emergency-modal h4 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+  }
+  
+  .emergency-modal p {
+    margin-bottom: 1rem;
+  }
+  
+  .emergency-modal textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .emergency-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .call-911 {
+    background-color: var(--accent-color);
+    color: var(--white);
+  }
+  
+  .notify-hospital {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  .cancel-emergency {
+    background-color: var(--gray-color);
+    color: var(--white);
+  }
+  
+  /* Appointment Modal Styles */
+  .appointment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: none;
+  }
+  
+  .appointment-modal.active {
+    display: flex;
+  }
+  
+  .modal-content {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--gray-color);
+  }
+  
+  .modal-content h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .form-group select,
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+  
+  /* Hospital Map Styles */
+  .hospital-map {
+    padding: 3rem 2rem;
+    background-color: var(--white);
+  }
+  
+  .hospital-map h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .map-container {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .map-container img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .map-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .emergency-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+  }
+  
+  .pharmacy-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .hero-banner {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .hero-content {
+      margin-bottom: 2rem;
+    }
+    
+    .hero-actions {
+      justify-content: center;
+    }
+    
+    .patient-portal {
+      flex-direction: column;
+    }
+    
+    .portal-info {
+      padding-right: 0;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hospital-header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    
+    .main-nav {
+      flex-direction: column;
+      padding: 1rem;
+    }
+    
+    .main-nav ul {
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    
+    .search-box {
+      width: 100%;
+    }
+    
+    .search-box input {
+      width: 100%;
+    }
+    
+    .chat-window, .emergency-modal {
+      width: 300px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .hero-content h2 {
+      font-size: 2rem;
+    }
+    
+    .hero-actions {
+      flex-direction: column;
+    }
+    
+    .access-cards, .services-grid, .tips-grid {
+      grid-template-columns: 1fr;
+    }
+  }

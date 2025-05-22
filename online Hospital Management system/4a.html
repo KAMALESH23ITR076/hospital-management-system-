@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daughter Hospital Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f8fb; margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #ccc; padding: 32px; }
+        h1 { color: #2a5d84; }
+        .event-box { width: 300px; height: 150px; background: #e3eaf2; border: 2px solid #2a5d84; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2em; margin: 40px auto; }
+        .log { text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Daughter Hospital Management System</h1>
+    <div class="event-box" id="box">Hover, Click, or Double Click Me!</div>
+    <div class="log" id="log"></div>
+    <script>
+        const box = document.getElementById('box');
+        const log = document.getElementById('log');
+        box.addEventListener('mouseover', () => log.textContent = 'Mouse Over Event');
+        box.addEventListener('mouseout', () => log.textContent = 'Mouse Out Event');
+        box.addEventListener('click', () => log.textContent = 'Mouse Click Event');
+        box.addEventListener('dblclick', () => log.textContent = 'Mouse Double Click Event');
+        box.addEventListener('mousedown', () => log.textContent = 'Mouse Down Event');
+        box.addEventListener('mouseup', () => log.textContent = 'Mouse Up Event');
+    </script>
+</body>
+</html>

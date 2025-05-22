@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #3a1c71, #00c6ff);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      color: #000;
+    }
+
+    .custom-navbar {
+      background: linear-gradient(to right, #3931af, #00c6ff);
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg custom-navbar w-100">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">KSR HOSPITALS</a>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link text-white" href="#">HOME</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">ABOUT US</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h1 class="text-center">Hospital Management</h1>
+    
+
+    <div class="calculator">
+      <h2>Cost Calculator</h2>
+
+      <label for="roomRate">Room Rate (per day):</label>
+      <input type="number" id="roomRate" class="form-control" placeholder="Room rate per day">
+
+      <label for="numDays">Number of Days:</label>
+      <input type="number" id="numDays" class="form-control" placeholder="Number of days in hospital">
+
+      <label for="medicationCost">Medication Cost (total):</label>
+      <input type="number" id="medicationCost" class="form-control" placeholder="Total medication cost">
+
+      <label for="consultationFee">Consultation Fee:</label>
+      <input type="number" id="consultationFee" class="form-control" placeholder="Consultation fee">
+
+      <button class="btn btn-success mt-2" onclick="calculateTotal()">Calculate Total Cost</button><br><br>
+      <h3>Total Estimated Cost: <span id="totalCost">0</span></h3>
+    </div>
+    <br><br>
+
+    <div class="calculator">
+      <h2>BMI Calculator</h2>
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" class="form-control" placeholder="Enter weight">
+
+      <label for="height">Height (m):</label>
+      <input type="number" id="height" class="form-control" placeholder="Enter height">
+
+      <button class="btn btn-success mt-2" onclick="calculateBMI()">Calculate BMI</button>
+      <h3>BMI: <span id="bmiResult">0</span></h3>
+    </div>
+  </div>
+
+  <script>
+    function calculateBMI() {
+      let weight = parseFloat(document.getElementById("weight").value);
+      let height = parseFloat(document.getElementById("height").value);
+      if (isNaN(weight) || isNaN(height) || height <= 0) {
+        alert("Please enter valid weight and height");
+        return;
+      }
+      let bmi = (weight / (height * height)).toFixed(2);
+      document.getElementById("bmiResult").innerText = bmi;
+    }
+
+    function calculateTotal() {
+      const roomRate = parseFloat(document.getElementById("roomRate").value);
+      
+      const numDays = parseInt(document.getElementById("numDays").value);
+      const medicationCost = parseFloat(document.getElementById("medicationCost").value);
+      const consultationFee = parseFloat(document.getElementById("consultationFee").value);
+
+      if (isNaN(roomRate) || isNaN(numDays) || isNaN(medicationCost) || isNaN(consultationFee) ) {
+        alert("Please fill all fields correctly!");
+        return;
+      }
+
+      const totalCost = (roomRate * numDays) + medicationCost + consultationFee ;
+      document.getElementById("totalCost").innerText = totalCost.toFixed(2);
+    }
+  </script>
+</body>
+</html>

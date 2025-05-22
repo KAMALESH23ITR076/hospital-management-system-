@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - New Bill</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        }
+        
+        .bill-item:hover {
+            background-color: #f8fafc;
+            transform: translateY(-2px);
+        }
+        
+        .gpa-input:focus {
+            box-shadow: 0 0 0 2px #3b82f6;
+        }
+        
+        .tab-active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        .floating-label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: white;
+            padding: 0 5px;
+            font-size: 12px;
+            color: #3b82f6;
+        }
+        
+        .floating-container {
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .service-item:hover {
+            background-color: #f0f9ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-hospital text-blue-600 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-blue-900">MediCare</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-blue-600">Dashboard</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Patients</a>
+                <a href="#" class="text-blue-600 font-medium">Billing</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Pharmacy</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Education</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hidden md:block text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                        <i class="fas fa-user text-blue-600"></i>
+                    </div>
+                    <span class="hidden md:inline text-gray-700">Dr. Smith</span>
+                </div>
+            </div>
+            
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Sidebar - Patient Info -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Patient Information</h2>
+                    
+                    <!-- Patient Search -->
+                    <div class="relative mb-6">
+                        <input type="text" placeholder="Search patients..." class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Current Patient -->
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Patient" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-bold">John Peterson</h3>
+                                <p class="text-sm text-gray-600">ID: MED-2023-00145</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <p class="text-gray-500">Age</p>
+                                <p class="font-medium">32 years</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Gender</p>
+                                <p class="font-medium">Male</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Blood Type</p>
+                                <p class="font-medium">O+</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Last Visit</p>
+                                <p class="font-medium">Jun 15, 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Insurance Info -->
+                    <div class="border border-gray-200 rounded-lg p-4 mb-6">
+                        <h4 class="font-bold text-gray-800 mb-2">Insurance Information</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Provider:</span>
+                                <span class="font-medium">BlueCross BlueShield</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Policy No:</span>
+                                <span class="font-medium">BCBS-8745-2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Expiry:</span>
+                                <span class="font-medium">Dec 31, 2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Coverage:</span>
+                                <span class="font-medium">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-3">Quick Actions</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-file-invoice mr-2"></i> New Bill
+                            </button>
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-prescription mr-2"></i> Prescription
+                            </button>
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-notes-medical mr-2"></i> Report
+                            </button>
+                            <button class="bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center">
+                                <i class="fas fa-calendar-plus mr-2"></i> Appointment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Content - New Bill Form -->
+            <div class="lg:w-2/3">
+                <div class="bg-white rounded-lg shadow-md p-6 fade-in">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Create New Bill</h2>
+                        <div class="flex space-x-3">
+                            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">
+                                <i class="fas fa-save mr-1"></i> Save Draft
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Bill Information -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Bill Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="floating-container">
+                                <span class="floating-label">Bill Date</span>
+                                <input type="date" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="floating-container">
+                                <span class="floating-label">Due Date</span>
+                                <input type="date" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="floating-container">
+                                <span class="floating-label">Department</span>
+                                <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Select Department</option>
+                                    <option value="cardiology">Cardiology</option>
+                                    <option value="neurology">Neurology</option>
+                                    <option value="orthopedics">Orthopedics</option>
+                                    <option value="pediatrics">Pediatrics</option>
+                                    <option value="radiology">Radiology</option>
+                                </select>
+                            </div>
+                            <div class="floating-container">
+                                <span class="floating-label">Attending Physician</span>
+                                <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Select Physician</option>
+                                    <option value="dr_smith">Dr. Smith</option>
+                                    <option value="dr_johnson">Dr. Johnson</option>
+                                    <option value="dr_williams">Dr. Williams</option>
+                                    <option value="dr_brown">Dr. Brown</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Services & Items -->
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Services & Items</h3>
+                            <button id="addService" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                <i class="fas fa-plus mr-1"></i> Add Service
+                            </button>
+                        </div>
+                        
+                        <div id="servicesContainer" class="border border-gray-200 rounded-lg overflow-hidden">
+                            <!-- Service Item Template -->
+                            <div class="service-item p-4 border-b border-gray-200 last:border-b-0">
+                                <div class="grid grid-cols-12 gap-4">
+                                    <div class="col-span-5">
+                                        <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            <option value="">Select Service</option>
+                                            <option value="consultation">Consultation</option>
+                                            <option value="ecg">ECG Test</option>
+                                            <option value="blood_test">Blood Test</option>
+                                            <option value="xray">X-Ray</option>
+                                            <option value="mri">MRI Scan</option>
+                                            <option value="ultrasound">Ultrasound</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <input type="number" placeholder="Qty" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" value="1">
+                                    </div>
+                                    <div class="col-span-3">
+                                        <input type="number" placeholder="Price" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" step="0.01">
+                                    </div>
+                                    <div class="col-span-2 flex items-center justify-center">
+                                        <button class="remove-service text-red-500 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <textarea placeholder="Description (optional)" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="1"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Discount & Tax -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Adjustments</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="floating-container">
+                                <span class="floating-label">Discount (%)</span>
+                                <input type="number" placeholder="0" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" max="100">
+                            </div>
+                            <div class="floating-container">
+                                <span class="floating-label">Tax (%)</span>
+                                <input type="number" placeholder="5" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" value="5">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bill Summary -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden mb-8">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h3 class="font-semibold text-gray-800">Bill Summary</h3>
+                        </div>
+                        <div class="divide-y divide-gray-200">
+                            <div class="px-4 py-3 flex justify-between">
+                                <p class="text-gray-600">Subtotal:</p>
+                                <p class="font-medium">$0.00</p>
+                            </div>
+                            <div class="px-4 py-3 flex justify-between">
+                                <p class="text-gray-600">Discount:</p>
+                                <p class="font-medium text-green-600">-$0.00</p>
+                            </div>
+                            <div class="px-4 py-3 flex justify-between">
+                                <p class="text-gray-600">Tax:</p>
+                                <p class="font-medium">$0.00</p>
+                            </div>
+                            <div class="px-4 py-3 flex justify-between bg-gray-50">
+                                <p class="font-bold">Total:</p>
+                                <p class="font-bold text-lg">$0.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Notes</h3>
+                        <textarea placeholder="Any additional notes about this bill..." class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col md:flex-row justify-end gap-3">
+                        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium">
+                            Cancel
+                        </button>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium">
+                            <i class="fas fa-save mr-2"></i> Save Bill
+                        </button>
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium">
+                            <i class="fas fa-paper-plane mr-2"></i> Save & Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-hospital text-blue-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">MediCare</span>
+                    </div>
+                    <p class="text-gray-400">Comprehensive healthcare management with integrated educational tools.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Dashboard</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Patient Records</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Billing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Medical Education</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">API Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">System Status</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-500 mr-2"></i>
+                            <span class="text-gray-400">support@medicare.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-blue-500 mr-2"></i>
+                            <span class="text-gray-400">+1 (800) 555-HELP</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                            <span class="text-gray-400">123 Medical Plaza, Boston</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 MediCare Hospital Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Add Service Functionality
+        document.getElementById('addService').addEventListener('click', () => {
+            const serviceItem = document.createElement('div');
+            serviceItem.className = 'service-item p-4 border-b border-gray-200 last:border-b-0';
+            serviceItem.innerHTML = `
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-5">
+                        <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Select Service</option>
+                            <option value="consultation">Consultation</option>
+                            <option value="ecg">ECG Test</option>
+                            <option value="blood_test">Blood Test</option>
+                            <option value="xray">X-Ray</option>
+                            <option value="mri">MRI Scan</option>
+                            <option value="ultrasound">Ultrasound</option>
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <input type="number" placeholder="Qty" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" value="1">
+                    </div>
+                    <div class="col-span-3">
+                        <input type="number" placeholder="Price" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" step="0.01">
+                    </div>
+                    <div class="col-span-2 flex items-center justify-center">
+                        <button class="remove-service text-red-500 hover:text-red-700">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <textarea placeholder="Description (optional)" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="1"></textarea>
+                </div>
+            `;
+            
+            document.getElementById('servicesContainer').appendChild(serviceItem);
+            
+            // Add event listener to the new remove button
+            serviceItem.querySelector('.remove-service').addEventListener('click', () => {
+                serviceItem.remove();
+                calculateBillTotal();
+            });
+            
+            // Add event listeners to calculate totals when values change
+            const inputs = serviceItem.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('change', calculateBillTotal);
+                input.addEventListener('input', calculateBillTotal);
+            });
+        });
+        
+        // Remove Service Functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-service')) {
+                e.target.closest('.service-item').remove();
+                calculateBillTotal();
+            }
+        });
+        
+        // Calculate Bill Total
+        function calculateBillTotal() {
+            let subtotal = 0;
+            const serviceItems = document.querySelectorAll('.service-item');
+            
+            serviceItems.forEach(item => {
+                const quantity = parseFloat(item.querySelector('input[type="number"]').value) || 0;
+                const price = parseFloat(item.querySelectorAll('input[type="number"]')[1].value) || 0;
+                subtotal += quantity * price;
+            });
+            
+            const discountPercentage = parseFloat(document.querySelector('input[placeholder="0"]').value) || 0;
+            const taxPercentage = parseFloat(document.querySelector('input[placeholder="5"]').value) || 5;
+            
+            const discountAmount = subtotal * (discountPercentage / 100);
+            const taxableAmount = subtotal - discountAmount;
+            const taxAmount = taxableAmount * (taxPercentage / 100);
+            const total = taxableAmount + taxAmount;
+            
+            // Update summary
+            document.querySelectorAll('.px-4.py-3')[0].querySelector('.font-medium').textContent = `$${subtotal.toFixed(2)}`;
+            document.querySelectorAll('.px-4.py-3')[1].querySelector('.font-medium').textContent = `-$${discountAmount.toFixed(2)}`;
+            document.querySelectorAll('.px-4.py-3')[2].querySelector('.font-medium').textContent = `$${taxAmount.toFixed(2)}`;
+            document.querySelectorAll('.px-4.py-3')[3].querySelector('.font-bold').textContent = `$${total.toFixed(2)}`;
+        }
+        
+        // Initialize calculation for existing items
+        const existingInputs = document.querySelectorAll('.service-item input, .service-item select');
+        existingInputs.forEach(input => {
+            input.addEventListener('change', calculateBillTotal);
+            input.addEventListener('input', calculateBillTotal);
+        });
+        
+        // Initialize calculation for discount and tax
+        const adjustmentInputs = document.querySelectorAll('input[placeholder="0"], input[placeholder="5"]');
+        adjustmentInputs.forEach(input => {
+            input.addEventListener('change', calculateBillTotal);
+            input.addEventListener('input', calculateBillTotal);
+        });
+    </script>
+</body>
+</html>

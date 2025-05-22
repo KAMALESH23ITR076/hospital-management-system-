@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Hospital - Billing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>/* Billing Page Specific Styles */
+        .billing-main {
+            padding: 2rem;
+            background-color: #f5f7fa;
+        }
+        
+        .billing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .billing-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-options select, 
+        .filter-options input {
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(42, 127, 186, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .card-content h4 {
+            font-size: 1rem;
+            color: var(--gray-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-content .amount {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .billing-records {
+            margin-top: 2rem;
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .billing-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .billing-table th, 
+        .billing-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .billing-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .billing-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-badge.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.paid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.overdue {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .action-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.3rem 0.6rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .action-btn.view {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .action-btn.edit {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .action-btn.delete {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+        
+        .table-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .page-info {
+            color: var(--gray-color);
+        }
+        
+        .pagination-btn {
+            padding: 0.5rem;
+            min-width: 40px;
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 0;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-color);
+        }
+        
+        /* Invoice Form Styles */
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .invoice-items {
+            margin: 1.5rem 0;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .item-header {
+            display: flex;
+            background-color: #f8f9fa;
+            padding: 0.8rem 1rem;
+            font-weight: 500;
+        }
+        
+        .item-header span {
+            flex: 1;
+        }
+        
+        .item-header span:last-child {
+            max-width: 100px;
+        }
+        
+        .item-row {
+            display: flex;
+            padding: 0.8rem 1rem;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .item-row input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 1rem;
+        }
+        
+        .item-row .item-total {
+            flex: 1;
+            text-align: right;
+            padding-right: 1rem;
+        }
+        
+        .remove-item-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .invoice-summary {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        
+        .summary-row.total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        #discount {
+            width: 100px;
+            text-align: right;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .cancel-btn {
+            background-color: var(--gray-color);
+            color: var(--white);
+        }
+        
+        /* Invoice Detail Styles */
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .invoice-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .invoice-status.paid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .invoice-status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .invoice-status.overdue {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .invoice-meta {
+            margin-bottom: 2rem;
+        }
+        
+        .meta-row {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+        
+        .meta-row span:first-child {
+            font-weight: 500;
+            min-width: 120px;
+        }
+        
+        .invoice-items-detail {
+            margin: 1.5rem 0;
+        }
+        
+        .invoice-items-detail .item-header {
+            background-color: #f8f9fa;
+        }
+        
+        .invoice-items-detail .item-row span {
+            flex: 1;
+            padding: 0.5rem;
+        }
+        
+        .invoice-summary-detail {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .invoice-notes {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .invoice-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .success-btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .billing-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-options {
+                width: 100%;
+            }
+            
+            .filter-options select, 
+            .filter-options input {
+                flex: 1;
+            }
+            
+            .summary-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .item-row {
+                flex-wrap: wrap;
+            }
+            
+            .item-row input {
+                min-width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .item-row .item-total {
+                text-align: left;
+                padding-left: 0;
+            }
+            
+            .invoice-actions {
+                flex-direction: column;
+            }
+            
+            .invoice-actions button {
+                width: 100%;
+            }
+        }</style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    // Sample billing data
+    const billingData = [
+        {
+            id: 'INV-2023-001',
+            patient: 'John Smith',
+            date: '2023-10-15',
+            service: 'Consultation',
+            amount: 150.00,
+            status: 'paid',
+            dueDate: '2023-10-30'
+        },
+        {
+            id: 'INV-2023-002',
+            patient: 'Sarah Johnson',
+            date: '2023-10-18',
+            service: 'Lab Tests',
+            amount: 85.50,
+            status: 'pending',
+            dueDate: '2023-11-02'
+        },
+        {
+            id: 'INV-2023-003',
+            patient: 'Michael Brown',
+            date: '2023-10-20',
+            service: 'X-Ray',
+            amount: 120.00,
+            status: 'pending',
+            dueDate: '2023-11-05'
+        },
+        {
+            id: 'INV-2023-004',
+            patient: 'Emily Davis',
+            date: '2023-10-05',
+            service: 'Surgery',
+            amount: 2500.00,
+            status: 'paid',
+            dueDate: '2023-10-20'
+        },
+        {
+            id: 'INV-2023-005',
+            patient: 'Robert Wilson',
+            date: '2023-09-28',
+            service: 'Physical Therapy',
+            amount: 95.00,
+            status: 'overdue',
+            dueDate: '2023-10-13'
+        }
+    ];
+
+    // DOM Elements
+    const billingTable = document.querySelector('.billing-table tbody');
+    const newInvoiceBtn = document.getElementById('new-invoice-btn');
+    const invoiceModal = document.getElementById('invoice-modal');
+    const detailModal = document.getElementById('detail-modal');
+    const closeModalBtns = document.querySelectorAll('.close-modal');
+    const cancelBtn = document.querySelector('.cancel-btn');
+    const invoiceForm = document.getElementById('invoice-form');
+    const addItemBtn = document.getElementById('add-item-btn');
+    const invoiceItems = document.querySelector('.invoice-items');
+    const itemTemplate = document.getElementById('item-template');
+    const statusFilter = document.getElementById('status-filter');
+    const dateFilter = document.getElementById('date-filter');
+    const applyFilter = document.getElementById('apply-filter');
+
+    // Initialize the page
+    function init() {
+        renderBillingTable(billingData);
+        setupEventListeners();
+        setDefaultDates();
+    }
+
+    // Render billing table
+    function renderBillingTable(data) {
+        billingTable.innerHTML = '';
+        
+        if (data.length === 0) {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td colspan="8" class="no-data">No billing records found</td>`;
+            billingTable.appendChild(row);
+            return;
+        }
+        
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.id}</td>
+                <td>${item.patient}</td>
+                <td>${formatDate(item.date)}</td>
+                <td>${item.service}</td>
+                <td>$${item.amount.toFixed(2)}</td>
+                <td><span class="status-badge ${item.status}">${capitalizeFirstLetter(item.status)}</span></td>
+                <td>${formatDate(item.dueDate)}</td>
+                <td>
+                    <div class="action-btns">
+                        <button class="action-btn view" data-id="${item.id}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn edit" data-id="${item.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            billingTable.appendChild(row);
+        });
+    }
+
+    // Set up event listeners
+    function setupEventListeners() {
+        // New invoice button
+        newInvoiceBtn.addEventListener('click', () => {
+            invoiceModal.classList.add('active');
+        });
+
+        // Close modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                invoiceModal.classList.remove('active');
+                detailModal.classList.remove('active');
+            });
+        });
+
+        // Cancel button
+        cancelBtn.addEventListener('click', () => {
+            invoiceModal.classList.remove('active');
+        });
+
+        // Add item button
+        addItemBtn.addEventListener('click', addNewItem);
+
+        // Calculate totals when item values change
+        invoiceItems.addEventListener('input', function(e) {
+            if (e.target.classList.contains('item-qty') || e.target.classList.contains('item-price')) {
+                calculateItemTotal(e.target.closest('.item-row'));
+            }
+            calculateInvoiceTotal();
+        });
+
+        // Remove item button
+        invoiceItems.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-item-btn') {
+                e.target.closest('.item-row').remove();
+                calculateInvoiceTotal();
+            }
+        });
+
+        // Discount input
+        document.getElementById('discount').addEventListener('input', calculateInvoiceTotal);
+
+        // Form submission
+        invoiceForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically send the data to a server
+            alert('Invoice saved successfully!');
+            this.reset();
+            invoiceModal.classList.remove('active');
+        });
+
+        // Apply filter
+        applyFilter.addEventListener('click', applyFilters);
+
+        // View invoice details
+        billingTable.addEventListener('click', function(e) {
+            if (e.target.closest('.action-btn.view')) {
+                const invoiceId = e.target.closest('.action-btn').dataset.id;
+                viewInvoiceDetails(invoiceId);
+            }
+            
+            if (e.target.closest('.action-btn.delete')) {
+                const invoiceId = e.target.closest('.action-btn').dataset.id;
+                deleteInvoice(invoiceId);
+            }
+        });
+    }
+
+    // Add new item row
+    function addNewItem() {
+        const newItem = itemTemplate.cloneNode(true);
+        newItem.id = '';
+        newItem.querySelector('.item-desc').value = '';
+        newItem.querySelector('.item-qty').value = 1;
+        newItem.querySelector('.item-price').value = '';
+        newItem.querySelector('.item-total').textContent = '0.00';
+        invoiceItems.appendChild(newItem);
+    }
+
+    // Calculate item total
+    function calculateItemTotal(itemRow) {
+        const qty = parseFloat(itemRow.querySelector('.item-qty').value) || 0;
+        const price = parseFloat(itemRow.querySelector('.item-price').value) || 0;
+        const total = qty * price;
+        itemRow.querySelector('.item-total').textContent = total.toFixed(2);
+    }
+
+    // Calculate invoice total
+    function calculateInvoiceTotal() {
+        let subtotal = 0;
+        const itemRows = invoiceItems.querySelectorAll('.item-row');
+        
+        itemRows.forEach(row => {
+            const total = parseFloat(row.querySelector('.item-total').textContent) || 0;
+            subtotal += total;
+        });
+        
+        const tax = subtotal * 0.05; // 5% tax
+        const discount = parseFloat(document.getElementById('discount').value) || 0;
+        const total = subtotal + tax - discount;
+        
+        document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+        document.getElementById('tax-amount').textContent = tax.toFixed(2);
+        document.getElementById('total-amount').textContent = total.toFixed(2);
+    }
+
+    // Apply filters
+    function applyFilters() {
+        const status = statusFilter.value;
+        const date = dateFilter.value;
+        
+        let filteredData = billingData;
+        
+        if (status !== 'all') {
+            filteredData = filteredData.filter(item => item.status === status);
+        }
+        
+        if (date) {
+            filteredData = filteredData.filter(item => item.date === date);
+        }
+        
+        renderBillingTable(filteredData);
+    }
+
+    // View invoice details
+    function viewInvoiceDetails(invoiceId) {
+        const invoice = billingData.find(item => item.id === invoiceId);
+        if (invoice) {
+            // Here you would typically fetch detailed invoice data from a server
+            detailModal.classList.add('active');
+        }
+    }
+
+    // Delete invoice
+    function deleteInvoice(invoiceId) {
+        if (confirm('Are you sure you want to delete this invoice?')) {
+            // Here you would typically send a delete request to a server
+            const index = billingData.findIndex(item => item.id === invoiceId);
+            if (index !== -1) {
+                billingData.splice(index, 1);
+                renderBillingTable(billingData);
+                alert('Invoice deleted successfully!');
+            }
+        }
+    }
+
+    // Set default dates
+    function setDefaultDates() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('invoice-date').value = today;
+        
+        const dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 15);
+        document.getElementById('due-date').value = dueDate.toISOString().split('T')[0];
+    }
+
+    // Helper functions
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    // Initialize the page
+    init();
+});
+        </script>
+    <!-- Header (Same as homepage) -->
+    <header class="hospital-header">
+        <div class="logo-container">
+            <img src="hospital-logo.png" alt="Hospital Logo" class="logo">
+            <h1>MediCare Hospital Management System</h1>
+        </div>
+        <div class="header-actions">
+            <div class="emergency-contact">
+                <i class="fas fa-phone-alt"></i>
+                <span>Emergency: 911</span>
+            </div>
+            <div class="user-controls">
+                <div class="user-profile">
+                    <img src="user-avatar.jpg" alt="User" class="user-avatar">
+                    <span>John Doe</span>
+                </div>
+                <div class="language-selector">
+                    <select>
+                        <option>English</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation (Same as homepage with Billing highlighted) -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="appointments.html"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+            <li><a href="departments.html"><i class="fas fa-procedures"></i> Departments</a></li>
+            <li><a href="pharmacy.html"><i class="fas fa-pills"></i> Pharmacy</a></li>
+            <li><a href="records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+            <li class="active"><a href="billing.html"><i class="fas fa-dollar-sign"></i> Billing</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+        <div class="search-box">
+            <input type="text" placeholder="Search bills, invoices...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </nav>
+
+    <!-- Main Billing Content -->
+    <main class="billing-main">
+        <div class="billing-container">
+            <h2 class="page-title"><i class="fas fa-file-invoice-dollar"></i> Billing & Payments</h2>
+            
+            <div class="billing-actions">
+                <button class="btn primary-btn" id="new-invoice-btn">
+                    <i class="fas fa-plus"></i> Create New Invoice
+                </button>
+                <div class="filter-options">
+                    <select id="status-filter">
+                        <option value="all">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="paid">Paid</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                    <input type="date" id="date-filter">
+                    <button class="btn secondary-btn" id="apply-filter">
+                        <i class="fas fa-filter"></i> Apply
+                    </button>
+                </div>
+            </div>
+
+            <!-- Billing Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Total Invoices</h4>
+                        <p class="amount">24</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Total Paid</h4>
+                        <p class="amount">$8,245.50</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Pending Payments</h4>
+                        <p class="amount">$3,120.75</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Overdue</h4>
+                        <p class="amount">$1,045.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Records Table -->
+            <div class="billing-records">
+                <div class="table-header">
+                    <h3>Billing Records</h3>
+                    <div class="table-actions">
+                        <button class="btn export-btn">
+                            <i class="fas fa-file-export"></i> Export
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="billing-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Patient</th>
+                                <th>Date</th>
+                                <th>Service</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Due Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="pagination">
+                        <button class="btn pagination-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="page-info">Page 1 of 3</span>
+                        <button class="btn pagination-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Invoice Modal -->
+        <div class="modal" id="invoice-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3><i class="fas fa-file-invoice"></i> Create New Invoice</h3>
+                
+                <form id="invoice-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="patient-select">Patient</label>
+                            <select id="patient-select" required>
+                                <option value="">Select Patient</option>
+                                <option value="1">John Smith (MRN: 12345)</option>
+                                <option value="2">Sarah Johnson (MRN: 12346)</option>
+                                <option value="3">Michael Brown (MRN: 12347)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="invoice-date">Invoice Date</label>
+                            <input type="date" id="invoice-date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="due-date">Due Date</label>
+                            <input type="date" id="due-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="invoice-status">Status</label>
+                            <select id="invoice-status" required>
+                                <option value="pending">Pending</option>
+                                <option value="paid">Paid</option>
+                                <option value="overdue">Overdue</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="invoice-notes">Notes</label>
+                        <textarea id="invoice-notes" rows="3"></textarea>
+                    </div>
+                    
+                    <h4>Invoice Items</h4>
+                    <div class="invoice-items">
+                        <div class="item-header">
+                            <span>Description</span>
+                            <span>Quantity</span>
+                            <span>Unit Price</span>
+                            <span>Total</span>
+                            <span>Action</span>
+                        </div>
+                        <div class="item-row" id="item-template">
+                            <input type="text" class="item-desc" placeholder="Service/Item description">
+                            <input type="number" class="item-qty" value="1" min="1">
+                            <input type="number" class="item-price" placeholder="0.00" step="0.01" min="0">
+                            <span class="item-total">0.00</span>
+                            <button type="button" class="btn remove-item-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <!-- Items will be added here -->
+                    </div>
+                    <button type="button" class="btn secondary-btn" id="add-item-btn">
+                        <i class="fas fa-plus"></i> Add Item
+                    </button>
+                    
+                    <div class="invoice-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (5%):</span>
+                            <span id="tax-amount">0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Discount:</span>
+                            <input type="number" id="discount" value="0" min="0" step="0.01">
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Amount:</span>
+                            <span id="total-amount">0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn cancel-btn">Cancel</button>
+                        <button type="submit" class="btn primary-btn">Save Invoice</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Invoice Detail Modal -->
+        <div class="modal" id="detail-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="invoice-header">
+                    <h3>Invoice #INV-2023-001</h3>
+                    <span class="invoice-status paid">Paid</span>
+                </div>
+                
+                <div class="invoice-meta">
+                    <div class="meta-row">
+                        <span>Patient:</span>
+                        <span>John Smith (MRN: 12345)</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Date Issued:</span>
+                        <span>15 Oct 2023</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Due Date:</span>
+                        <span>30 Oct 2023</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Payment Date:</span>
+                        <span>25 Oct 2023</span>
+                    </div>
+                </div>
+                
+                <div class="invoice-items-detail">
+                    <div class="item-header">
+                        <span>Description</span>
+                        <span>Qty</span>
+                        <span>Unit Price</span>
+                        <span>Total</span>
+                    </div>
+                    <div class="item-row">
+                        <span>Consultation Fee</span>
+                        <span>1</span>
+                        <span>$150.00</span>
+                        <span>$150.00</span>
+                    </div>
+                    <div class="item-row">
+                        <span>Blood Test</span>
+                        <span>1</span>
+                        <span>$85.50</span>
+                        <span>$85.50</span>
+                    </div>
+                    <div class="item-row">
+                        <span>X-Ray</span>
+                        <span>1</span>
+                        <span>$120.00</span>
+                        <span>$120.00</span>
+                    </div>
+                </div>
+                
+                <div class="invoice-summary-detail">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span>$355.50</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (5%):</span>
+                        <span>$17.78</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Discount:</span>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total Amount:</span>
+                        <span>$373.28</span>
+                    </div>
+                </div>
+                
+                <div class="invoice-notes">
+                    <h4>Notes</h4>
+                    <p>Insurance covered 80% of the total amount. Patient paid remaining balance.</p>
+                </div>
+                
+                <div class="invoice-actions">
+                    <button class="btn secondary-btn">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                    <button class="btn primary-btn">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                    <button class="btn success-btn">
+                        <i class="fas fa-check"></i> Mark as Paid
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Same as homepage) -->
+    <footer class="hospital-footer">
+        <!-- Footer content from homepage -->
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="billing.js"></script>
+</body>
+</html>
